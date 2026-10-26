@@ -67,6 +67,36 @@ cliquer sur l'icône à gauche de l'adresse (cadenas ou réglages) et autoriser 
 Chaque modèle est chargé au premier usage puis gardé en mémoire : passer de
 l'un à l'autre ne le recharge pas.
 
+## Dictée dans n'importe quelle application (raccourci clavier)
+
+Au lieu de la page web, on peut dicter directement dans le champ où se trouve
+le curseur (Outlook, Teams, Word, navigateur…) :
+
+```powershell
+uv run hotkey.py
+```
+
+Attendre `Ready.` dans le terminal, puis :
+
+1. Cliquer dans le champ de texte voulu.
+2. **Maintenir `Ctrl` droit** enfoncé et parler.
+3. Relâcher : le texte est transcrit (Parakeet) puis collé à l'emplacement du curseur.
+
+Le terminal doit rester ouvert ; `Ctrl+C` pour quitter. La variable
+`DICTEE_MODELS_DIR` s'applique aussi (voir plus bas).
+
+- **Changer de touche** : `$env:DICTEE_HOTKEY = "alt_r"` (nom de touche
+  [pynput](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key),
+  par ex. `ctrl_r`, `alt_r`, `f9`).
+- Le texte passe par le **presse-papiers** : son contenu précédent est remplacé.
+- Le collage ne fonctionne pas dans les applications lancées **en administrateur**
+  (restriction Windows).
+- Un antivirus d'entreprise peut bloquer ou signaler l'outil, car il écoute
+  le clavier et simule `Ctrl+V`.
+- **macOS** : autoriser le terminal (ou VS Code) dans *Réglages Système → Confidentialité
+  et sécurité → Accessibilité* et *Surveillance de l'entrée*, ainsi que l'accès au micro.
+  Il n'y a pas de `Ctrl` droit sur un MacBook : utiliser `DICTEE_HOTKEY=alt_r`.
+
 ## Premier lancement : téléchargement des modèles
 
 Au premier usage de chaque modèle, il est téléchargé depuis Hugging Face puis
