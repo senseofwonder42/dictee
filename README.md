@@ -50,8 +50,11 @@ Deux modèles au choix :
 ## Utilisation
 
 1. Choisir le modèle (Parakeet par défaut).
-2. Cliquer sur **Enregistrer**, parler, puis **Arrêter**.
-3. La transcription se lance automatiquement à l'arrêt. Le texte apparaît
+2. Cliquer sur **Enregistrer**, parler, puis **Arrêter**. On peut aussi
+   importer un fichier audio (icône d'import sous le lecteur).
+3. La transcription se lance automatiquement à l'arrêt ou à l'import. Le
+   bouton **Transcribe** permet de la relancer (par ex. après avoir changé
+   de modèle ou de vocabulaire). Le texte apparaît
    dans la zone « Transcription », modifiable, avec un bouton de copie en haut à droite.
 4. La ligne d'état indique le modèle, la durée de l'audio et le temps de
    transcription, par ex. `Parakeet · 12.4 s audio · 1.8 s`.

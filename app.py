@@ -138,12 +138,15 @@ def build_ui() -> gr.Blocks:
         The Blocks app, not yet launched.
     """
     with gr.Blocks(title="Dictée", analytics_enabled=False) as demo:
-        mic = gr.Audio(sources=["microphone"], type="numpy", label="Microphone")
+        mic = gr.Audio(sources=["microphone", "upload"], type="numpy", label="Audio")
         model = gr.Dropdown(MODELS, value=PARAKEET, label="Model")
         vocab = gr.Textbox(label="Vocabulary / jargon (Whisper only)", max_lines=1)
+        button = gr.Button("Transcribe", variant="primary")
         output = gr.Textbox(label="Transcription", lines=8, interactive=True, buttons=["copy"])
         status = gr.Markdown()
-        mic.stop_recording(_on_stop, inputs=[mic, model, vocab], outputs=[output, status])
+        # Auto-run when a recording stops or a file is uploaded; the button re-runs on demand.
+        for trigger in (mic.stop_recording, mic.upload, button.click):
+            trigger(_on_stop, inputs=[mic, model, vocab], outputs=[output, status])
     return demo
 
 
